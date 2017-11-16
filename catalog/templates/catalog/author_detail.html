@@ -1,0 +1,51 @@
+{% extends "base_generic.html" %}
+
+
+{% block content %}
+  <h1>Author: {{ author.first_name }}</h1>
+  
+  <p><strong>Author First Name:</strong> {{ author.first_name }}</p>
+  <p><strong>Author Second Name</strong> {{ author.last_name }}</p>
+  <p><strong>Author Date Of Birth</strong> {{ author.date_of_birth }}</p> 
+
+{% endblock %}
+
+
+
+<!-- Book
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
+      # Foreign Key used because book can only have one author, but authors can have multiple books
+      # Author as a string rather than object because it hasn't been declared yet in file.
+    summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
+    isbn = models.CharField('ISBN',max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
+    genre = models.ManyToManyField(Genre, help_text="Select a genre for this book")
+      # ManyToManyField used because Subject can contain many books. Books can cover many subjects.
+      # Subject declared as an object because it has already been defined.
+      
+      Author
+     first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    date_of_birth = models.DateField(null=True, blank=True)
+    date_of_death = models.DateField('died', null=True, blank=True)
+    
+    -->
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

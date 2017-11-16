@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ book.title }}</h1>
+
+  <p><strong>Author:</strong> <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Summary:</strong> {{ book.summary }}</p>
+  <p><strong>ISBN:</strong> {{ book.isbn }}</p> 
+  <p><strong>Language:</strong> {{ book.language }}</p>  
+  <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>  
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Copies</h4>
+
+    {% for copy in book.bookinstance_set.all %}
+    <hr>
+    <p><strong>Status</strong></p>
+    <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+    {% if copy.status != 'a' %}<p><strong>Due to be returned:</strong> {{copy.due_back}}</p>{% endif %}
+    <p><strong>Imprint:</strong> {{copy.imprint}}</p>
+    <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+    <p><strong>Due Day :</strong> {{ book.due_back}}</p>
+    <p><strong>Payment :</strong> {{ book.payment}}</p>
+
+    
+    {% endfor %}
+  </div>
+{% endblock %}
+
+ <form action="https://sandbox.google.com/checkout/api/checkout/
+v2/checkoutForm/Merchant/xxxxx" id="BB_BuyButtonForm" method="post"
+name="BB_BuyButtonForm">
+ <input name="item_name_1" type="hidden" value="{{ object.name }}"/>
+ <input name="item_description_1"
+ type="hidden" value="{{ object.description }}"/>
+ <input name="item_quantity_1" type="hidden" value="1"/>
+ <input name="item_price_1"
+ type="hidden" value="{{ object.price_in_dollars }}"/>
+ <input name="item_currency_1" type="hidden" value="USD"/>
+ <input name="_charset_" type="hidden" value="utf-8"/>
+ <input alt="" src="https://sandbox.google.com/checkout/buttons/
+buy.gif?merchant_id=xxxxx&amp;w=117&amp;h=48&amp;style=white&amp;
+variant=text&amp;loc=en_US" type="image" />
+</form>
